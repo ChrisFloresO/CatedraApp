@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<body> 
+    <main><center>
+	<f:metadata>
+	<f:viewParam name="id" value="#{personaControler.id}"/>
+	</f:metadata>
+
+<h:form>
+	<br></br>
+	<h:messages globalOnly="true"/>
+	<div class="grid_4">
+              <h2> <em>Editar Usuarios</em></h2>
+            </div>
+	<h:panelGrid columns ="3">
+	
+		<h:outputLabel class="btn btn-info pull-center" value="Id:" for="id"/>
+		<h:inputText value="#{personaControler.persona.id}" id="id" class="textbox"  size="50" />
+		<h:message  for="id"/>
+	
+		<h:outputLabel class="btn btn-info pull-center" value="Cedula:" for="cedula"/>
+		<h:inputText value="#{personaControler.persona.cedula}" id="cedula" class="textbox"  size="50" />
+		<h:message  for="cedula"/>
+		
+		<h:outputLabel class="btn btn-info pull-center" value="Nombre:" for="nombre"/>
+		<h:inputText value="#{personaControler.persona.nombre}" id="nombre" class="textbox"  size="50" />
+		<h:message  for="nombre"/>
+		
+		<h:outputLabel class="btn btn-info pull-center" value="Apellido:" for="apellido"/>
+		<h:inputText value="#{personaControler.persona.apellido}" id="apellido" class="textbox"  size="50" />
+		<h:message  for="apellido"/>
+		
+		<h:outputLabel class="btn btn-info pull-center" value="Email:" for="email"/>
+		<h:inputText value="#{personaControler.persona.email}" id="email" class="textbox"  size="50" />
+		<h:message  for="email"/>
+		
+		<h:outputLabel class="btn btn-info pull-center" value="Contrasena" for="contrasena"/>
+		<h:inputText value="#{personaControler.persona.contrasena}" id="contrasena" class="textbox"  size="50" />
+		<h:message  for="contrasena"/>
+		
+	</h:panelGrid>
+	 <div class="box-footer">
+              	<h:commandButton action="#{personaControler.Guardar1()}" class="boton_2" id="btn" value="ACTUALIZAR DATOS" />
+              </div>
+	
+</h:form>
+	  </center>
+    </main>
+</body> 
+</html>

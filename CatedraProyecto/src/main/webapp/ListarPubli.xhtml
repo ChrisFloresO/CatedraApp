@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<body> 
+    <main>
+    <center>
+    <br />
+	<h:form>
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h2 class="box-title">
+              <em>Listado Usuario</em>
+              </h2>
+            </div>
+     </div>
+	<h:outputText value="No existe publicaciones registros" 
+	rendered="#{empty publicacionControler.loadPublicaciones()}"/>
+
+	<h:dataTable value ="#{publicacionControler.publicacion}" var="publicacion"
+		rendered="#{not publicacionControler.publicacion}"
+		cellspacing="10" width="50%">
+
+		<h:column>
+			<f:facet name="header" >Id</f:facet>
+			#{publicacion.id}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Tipo</f:facet>
+			#{publicacion.tipo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Texto</f:facet>
+			#{publicacion.texto}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Fecha</f:facet>
+			#{publicacion.fecha}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Imagenes</f:facet>
+			#{publicacion.imagenes}
+		</h:column>
+	
+		<h:column class="btn-wr">
+			<h:commandButton action="#{publicacionControler.listaPublicacionEditar(publicacion.id)}" value="Editar" class="boton_21"/>
+		</h:column>
+		<h:column>
+			<h:commandButton action="#{personaControler.Borrar(publicacion.id)}" value="Borrar" class="boton_21"/>
+		</h:column>
+	
+	</h:dataTable>
+
+	
+</h:form>	
+	  </center>
+    </main>
+    
+</body> 
+</html>

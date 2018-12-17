@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<body> 
+    <main>
+    <center>
+    <br />
+	<h:form>
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h2 class="box-title">
+              <em>Listado Usuario</em>
+              </h2>
+            </div>
+     </div>
+	<h:outputText value="No existe usuarios registros" 
+	rendered="#{empty personaControler.usuarios}"/>
+
+	<h:dataTable value ="#{personaControler.usuarios}" var="usuario"
+		rendered="#{not empty personaControler.usuarios}"
+		cellspacing="10" width="50%">
+
+		<h:column>
+			<f:facet name="header" >Cedula</f:facet>
+			#{usuario.cedula}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+			#{usuario.nombre}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Apellido</f:facet>
+			#{usuario.apellido}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Email</f:facet>
+			#{usuario.email}
+		</h:column>
+	
+		<h:column class="btn-wr">
+			<h:commandButton action="#{personaControler.listadatosEditar(usuario.id)}" value="Editar" class="boton_21"/>
+		</h:column>
+		<h:column>
+			<h:commandButton action="#{personaControler.Borrar(usuario.id)}" value="Borrar" class="boton_21"/>
+		</h:column>
+	
+	</h:dataTable>
+
+	
+</h:form>	
+	  </center>
+    </main>
+    
+</body> 
+</html>

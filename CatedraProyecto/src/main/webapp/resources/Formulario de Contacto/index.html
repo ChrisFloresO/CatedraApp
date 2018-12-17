@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=2.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Registro</title>
+
+    <link rel="stylesheet" href="resources/Formulario de Contacto/css/estilos.css"/>
+    <link rel="stylesheet" href="resources/edusite-master/css/font-awesome.min.css"/>
+
+    <script src="resources/Formulario de Contacto/js/jquery-3.2.1.js"></script>
+    <script src="resources/Formulario de Contacto/js/script.js"></script>
+</head>
+<body>
+
+    <section class="form_wrap">
+
+        <section class="cantact_info">
+            <section class="info_title">
+                <span class="fa fa-user-circle"></span>
+                <h2>INFORMACION DEL REGISTRO</h2>
+            </section>
+            <section class="info_items">
+                <p><span class="fa fa-envelope"></span> catedraunescoinclusion@ups.edu.ec</p>
+                <p><span class="fa fa-mobile"></span> (+593) 74135250 ext 1278</p>
+            </section>
+        </section>
+
+        <form action="" class="form_contact">
+            <h2>REGISTRO USUARIO</h2>
+            <div class="user_info">
+            <h:form>
+            <label for="number" class= "leber">Cedula</label>
+                <input  type="text" id="cedula" name="#{personaControler.persona.cedula}"/>
+                
+                <label for="names">Nombres *</label>
+                <input type="text" id="nombre" name="#{personaControler.persona.nombre}"/>
+
+                <label for="names">Apellidos</label>
+                <input type="text" id="apellidos" name="#{personaControler.persona.apellido}"/>
+
+                <label for="email">Correo electronico *</label>
+                <input type="text" id="email" name="#{personaControler.persona.email}"/>
+
+                <label for="password">Contraseña</label>
+                <input type="text" id="password" name="#{personaControler.persona.contrasena}"/>                
+				        
+                <button value="Registrarse" onclick="#{personaControler.Guardar()}"/>
+                 </h:form>
+            </div>
+           
+        </form>
+
+    </section>
+
+</body>
+</html>
