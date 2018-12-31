@@ -1,40 +1,28 @@
 package ec.edu.ups.app.catedra.controlador;
 
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-
-import ec.edu.ups.app.catedra.datos.ImagenDAO;
-import ec.edu.ups.app.catedra.datos.PersonaDAO;
 import ec.edu.ups.app.catedra.datos.PublicacionDAO;
-import ec.edu.ups.app.catedra.modelo.Imagen;
-import ec.edu.ups.app.catedra.modelo.Persona;
 import ec.edu.ups.app.catedra.modelo.Publicacion;
 
 
 @ManagedBean
+@RequestScoped
 public class PublicacionControler 
 {
 	//variables
 	private Publicacion publicacion;
 	private List<Publicacion> publicaciones;
-	private List<Imagen> imagenes;
-	private Imagen imagen;
-	int codigo;
+	int id;
 
 	@Inject
 	private PublicacionDAO pdao;
-	
-	@Inject
-	private ImagenDAO idao;
-	
-	
-	@Inject
-	private PersonaDAO perdao;
 	
 	@Inject
 	private Sesion sesion;
@@ -45,38 +33,30 @@ public class PublicacionControler
 	@PostConstruct
 	public void init() {
 		publicacion = new Publicacion();
+		loadPublicaciones();
 	}
 	public String guardar() 
 	{
-		
-		publicacion = pdao.leer(codigo);
-		publicacion.setImagenes(imagenes);
-		System.out.println(publicacion);
-		// invoque al DAO y envie la entidad a persistir
 		try {
-			pdao.guardar(publicacion);
-			loadImagenes();
+			
+		pdao.guardar(publicacion);
+		System.out.println("se guardo");
+		//loadPublicaciones();
 		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-			// facesContext.addMessage(null, m);
-			return null;
+			e.getMessage();
+			
 		}
-
-		return "ListarPubli";
+		return "ListarPubli.xhtml";
 	}
-
 	
 	public void loadPublicaciones() {
 		publicaciones = pdao.listadoPublicaciones();
 	}
 	
-	public void loadImagenes() {
-		imagenes = pdao.listadoImagenes();
-	}
 	public void Borrar1(int codigo) {
 		System.out.println("aqui en el borrar"+codigo);
 		pdao.borrar(codigo);
+		loadPublicaciones();
 	}
 
 	@PreDestroy
@@ -120,13 +100,17 @@ public class PublicacionControler
 	 */
 	public String listaPublicacionEditar(int codigo) {
 		publicacion = pdao.leer(codigo);
-		return "EditarP";
+		return "EditarPubli";
 	}
-	public String listaImagenEditar(int codigo) {
-		imagen = idao.leer(codigo);
-		return "EditarI";
-	}
+	
 	//getters and setters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+		listaPublicacionEditar(id);
+	}
 	
 	
 	public Publicacion getPublicacion() {
@@ -141,41 +125,12 @@ public class PublicacionControler
 	public void setPublicaciones(List<Publicacion> publicaciones) {
 		this.publicaciones = publicaciones;
 	}
-	public List<Imagen> getImagenes() {
-		return imagenes;
-	}
-	public void setImagenes(List<Imagen> imagenes) {
-		this.imagenes = imagenes;
-	}
-	public Imagen getImagen() {
-		return imagen;
-	}
-	public void setImagen(Imagen imagen) {
-		this.imagen = imagen;
-	}
-	public int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+	
 	public PublicacionDAO getPdao() {
 		return pdao;
 	}
 	public void setPdao(PublicacionDAO pdao) {
 		this.pdao = pdao;
-	}
-	public ImagenDAO getIdao() {
-		return idao;
-	}
-	public void setIdao(ImagenDAO idao) {
-		this.idao = idao;
-	}
-	public PersonaDAO getPerdao() {
-		return perdao;
-	}
-	public void setPerdao(PersonaDAO perdao) {
-		this.perdao = perdao;
 	}
 	public Sesion getSesion() {
 		return sesion;

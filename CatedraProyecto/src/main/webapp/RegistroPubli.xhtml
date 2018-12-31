@@ -3,7 +3,53 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
+<head>
 
-	<ui:composition template="">
-	</ui:composition>
+</head>
+<body>
+    <center>
+    	<br />
+	<h:form enctype="multipart/form-data" >
+	  
+		<div class="row box-2">
+            <div class="grid_4">
+              <h2> <em>Publicacion</em></h2>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->            
+                <div>
+                  <label for="texto" >Texto</label>
+                  <div>
+                  	<h:inputText value="#{publicacionControler.publicacion.texto}" class="textbox" id="texto" size="280">
+					</h:inputText>
+					<h:message for="texto" errorClass ="Invalid"/>
+                  </div>
+                </div>
+                
+                <div>
+                  <label for="tipo" >Tipo</label>
+                  <div >
+                  	<h:inputText value="#{publicacionControler.publicacion.tipo}" id="tipo" size="50"/>
+                  </div>
+                </div>
+                
+                <div>
+                  <label for="fecha" >Fecha</label>
+                  <div >
+                  	<h:inputText value="#{publicacionControler.publicacion.fecha}" id="fecha" size="50"/>
+                  </div>
+                  
+                </div>
+                 <label for="imagen" >Imagen</label>
+                  <div >
+                  	<h:inputFile id="file" class="textbox" value="#{publicacionControler.pdao.file}" />
+                  </div>
+	             <dir class="btn-wr">
+	             	 <h:commandButton action="#{publicacionControler.guardar()}"  value="Realizar Publicacion" />
+	          	 </dir> 	
+          </div>
+	  </h:form>
+	  </center>
+    </body>
+
 </html>

@@ -28,7 +28,4 @@ public class ImagenDAO {
 	public void actualizar(Imagen archivo){
 		em.merge(archivo);
 	}
-	public Imagen leer(int id) {
-		return em.find(Imagen.class, id);
-	}
 }

@@ -11,21 +11,21 @@
 	<div class="box box-info">
             <div class="box-header with-border">
               <h2 class="box-title">
-              <em>Listado Usuario</em>
+              <em>Listado Publicaciones</em>
               </h2>
             </div>
      </div>
 	<h:outputText value="No existe publicaciones registros" 
-	rendered="#{empty publicacionControler.loadPublicaciones()}"/>
+	rendered="#{empty publicacionControler.publicaciones}"/>
 
-	<h:dataTable value ="#{publicacionControler.publicacion}" var="publicacion"
-		rendered="#{not publicacionControler.publicacion}"
-		cellspacing="10" width="50%">
+	<h:dataTable value ="#{publicacionControler.publicaciones}" var="publicacion"
+		rendered="#{not empty publicacionControler.publicaciones}" cellspacing="10" width="50%">
 
 		<h:column>
-			<f:facet name="header" >Id</f:facet>
-			#{publicacion.id}
+			<f:facet name="header"></f:facet>
+			<img src="data:image/png;base64,#{publicacionControler.pdao.convertir(publicacion.imagen)}" />
 		</h:column>
+		
 		<h:column>
 			<f:facet name="header">Tipo</f:facet>
 			#{publicacion.tipo}
@@ -38,17 +38,12 @@
 			<f:facet name="header">Fecha</f:facet>
 			#{publicacion.fecha}
 		</h:column>
-		
-		<h:column>
-			<f:facet name="header">Imagenes</f:facet>
-			#{publicacion.imagenes}
-		</h:column>
 	
 		<h:column class="btn-wr">
 			<h:commandButton action="#{publicacionControler.listaPublicacionEditar(publicacion.id)}" value="Editar" class="boton_21"/>
 		</h:column>
 		<h:column>
-			<h:commandButton action="#{personaControler.Borrar(publicacion.id)}" value="Borrar" class="boton_21"/>
+			<h:commandButton action="#{publicacionControler.Borrar1(publicacion.id)}" value="Borrar" class="boton_21"/>
 		</h:column>
 	
 	</h:dataTable>

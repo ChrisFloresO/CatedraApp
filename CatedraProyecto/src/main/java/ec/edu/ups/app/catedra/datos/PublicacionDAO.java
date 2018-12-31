@@ -14,9 +14,10 @@ import ec.edu.ups.app.catedra.modelo.Persona;
 import ec.edu.ups.app.catedra.modelo.Publicacion;
 
 
+
 /**
  * 
- * @author Franklin Villavicencio y Christian Flores
+ * @author Christian Flores
  */
 
 @Stateless
@@ -26,7 +27,6 @@ public class PublicacionDAO {
 	private Part file2;
 	private Imagen imagen;
 	private List<Imagen> imagenes;
-	private List<Publicacion> publicaciones;
 	
 	@Inject
 	private ImagenDAO daoImg;
@@ -52,6 +52,7 @@ public class PublicacionDAO {
 		this.file2 = file2;
 	}
 	
+
 	//metodos de crud
 	public void insertar(Publicacion publicacion) {
 		em.persist(publicacion);
@@ -81,14 +82,15 @@ public class PublicacionDAO {
 		return listado;
 	}
 	
-	public List<Imagen> listadoImagenes() {
-		String jppql = "SELECT i FROM Imagen i";
-		Query query = em.createQuery(jppql, Imagen.class);
+	public List<Publicacion> listadoPubliFecha (String fecha) 
+	{
+		String jppql = "SELECT pu FROM Publicacion pu where pu.fecha = :fecha";
+		Query query = em.createQuery(jppql, Publicacion.class);
+		query.setParameter("fecha", fecha);
 		@SuppressWarnings("unchecked")
-		List<Imagen> listado = query.getResultList();
-		return listado;
+		List<Publicacion> listado1 = query.getResultList();
+		return listado1;
 	}
-
 	
 	/**
 	 * Este metodo permite guardar la imagen como tal en la base de datos
@@ -112,7 +114,7 @@ public class PublicacionDAO {
 	
 	/**
 	 * este metodo permite guardar un plato resiviendo como parametro el plato y verificando que los campos que resiva sena diferentes de nulos.
-	 * @param plato
+	 * @param publicac ion
 	 */
 	public void guardar(Publicacion publicacion)
 	{
@@ -122,14 +124,15 @@ public class PublicacionDAO {
 			int fotoSize = (int)file.getSize();
         	System.out.println("tamno     "+fotoSize);
         	byte[] foto;
+        	
         	if(fotoSize>0){
         		foto = new byte [fotoSize];
-        		
+        		System.out.println("valor     "+foto);
 					file.getInputStream().read(foto);
 				
-					
-        		publicacion.setImagenes(imagenes);		
+        		publicacion.setImagen(foto);		
         		insertar(publicacion);
+        		//guardarImagen();
         	}
 		} 
 		else
